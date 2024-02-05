@@ -1,10 +1,10 @@
 import { pipeline } from "@xenova/transformers";
-import { loadingMessage } from "./loading";
+import { loadingMessage } from "./loading.js";
 
 // import data from './data.json'
 let data = null
 
-export async function transcribeAudio() {
+export async function transcribeAudio(pathVideo) {
   const options = {
     chunk_length_s: 30, 
     stride_length_s: 5,
@@ -18,12 +18,13 @@ export async function transcribeAudio() {
     loadingMessage('Iniciando a transcrição de áudio, essa etapa é bem demorada... aguarde')
     console.log('[START_TRANSCRIBE]')
 
-    const transcriber = await pipeline('automatic-speech-recognition', 'Xenova/whisper-small')
-    // data = await transcriber('../audio.mp3', options)
-    data = await transcriber(`../server/audios/${videoId}.mp3`, options)
+    const transcriber = await pipeline('automatic-speech-recognition', 'Xenova/whisper-small.en')
+    data = await transcriber(pathVideo, options)
+
   } catch (error) {
     console.log('[ERROR_TRANSCRIBE] ', error)
     throw new Error(error)
+
   } finally {
     console.timeEnd()
     loadingMessage('Transcrição terminada!')

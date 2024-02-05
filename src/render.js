@@ -33,7 +33,7 @@ function grupedText(text, timestamp){
 
     return group.map((item, index)=> {
         const [initialTime, finalTime] = timestamp
-        const seekTo = index ===0 ? initialTime : (((finalTime - initialTime) / (group.length - index)) + initialTime)
+        const seekTo = index == 0 ? initialTime : (((finalTime - initialTime) / (group.length - index)) + initialTime)
 
 
         return `<span onclick=seek(event) data-seek-to="${seekTo}">${item} </span>`
@@ -42,6 +42,6 @@ function grupedText(text, timestamp){
 
 
 export function renderText({chunks}){
-    const formattedTranscription = chunks.map(renderChunk)
+    const formattedTranscription = chunks.map(renderChunk).join("")
     document.querySelector(".transcription .content").innerHTML = formattedTranscription
 }

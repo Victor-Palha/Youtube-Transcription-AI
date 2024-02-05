@@ -17,18 +17,23 @@ form.addEventListener("submit", async (event)=>{
         await loadVideo(url)
 
         loadingMessage("Carregando o áudio do vídeo!")
-        await axios.get("http://localhost:3003/audio", {
+        const response = await axios.get("http://localhost:3003/audio", {
             params: {
                 v: getVideoId(url)
             }
         })
 
-        const data = await transcribeAudio(getVideoId(url))
-        
+        const data = await transcribeAudio(response.data.path)        
+
         renderText(data)
     } catch (error) {
         console.error("[SUBMIT_ERROR] ",error)
     } finally{
         stopLoading()
+        await axios.delete("http://localhost:3003/audio", {
+            params: {
+                v: getVideoId(url)
+            }
+        })
     }
 })
