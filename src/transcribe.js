@@ -18,7 +18,8 @@ export async function transcribeAudio(pathVideo) {
     loadingMessage('Iniciando a transcrição de áudio, essa etapa é bem demorada... aguarde')
     console.log('[START_TRANSCRIBE]')
 
-    const transcriber = await pipeline('automatic-speech-recognition', 'Xenova/whisper-small.en')
+    const transcriber = await pipeline('automatic-speech-recognition', 'Xenova/whisper-small')
+    console.log('[TRANSCRIBE]')
     data = await transcriber(pathVideo, options)
 
   } catch (error) {
