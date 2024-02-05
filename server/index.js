@@ -12,8 +12,9 @@ app.get("/audio", async (req, res)=>{
     const videoId = req.query.v
     try {
         console.log("[AUDIO] Downloading audio from videoId: ", videoId)
-        await downloader(videoId)
-        await createMP3(videoId)
+        await downloader(videoId).then(async ()=>{
+            await createMP3(videoId)
+        })
         return res.send({ok: true})
     } catch (error) {
         console.error("[AUDIO_ERROR] ",error)

@@ -7,7 +7,7 @@ export const createMP3 = (videoId)=> new Promise((res, rej) => {
     ffmpeg()
     .input(`./server/audios/${videoId}.mp4`)
     .outputOptions("-ab", "20k")
-    .saveToFile(path.resolve() + "./server/audios/"+videoId+".mp3")
+    .saveToFile(path.resolve() + "/server/audios/"+videoId+".mp3")
     .on("end", ()=>{
         console.log("[CREATE_MP3] MP3 Created!")
         res()
