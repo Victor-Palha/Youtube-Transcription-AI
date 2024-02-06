@@ -17,7 +17,7 @@ form.addEventListener("submit", async (event)=>{
         await loadVideo(url)
 
         loadingMessage("Carregando o áudio do vídeo!")
-        const response = await axios.get("https://ty-transcription.onrender.com/audio", {
+        const response = await axios.get("http://35.175.175.185:3003/audio", {
             params: {
                 v: getVideoId(url)
             }
@@ -31,7 +31,7 @@ form.addEventListener("submit", async (event)=>{
         console.error("[SUBMIT_ERROR] ",error)
     } finally{
         stopLoading()
-        await axios.delete("https://ty-transcription.onrender.com/audio", {
+        await axios.delete("http://35.175.175.185:3003/audio", {
             params: {
                 v: getVideoId(url)
             }
