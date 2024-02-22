@@ -17,7 +17,7 @@ form.addEventListener("submit", async (event)=>{
         await loadVideo(url)
 
         loadingMessage("Carregando o áudio do vídeo!")
-        const response = await axios.get("https://api.victor-palha.com/audio", {
+        const response = await axios.get("https://yt-api-ai.azurewebsites.net/audio", {
             params: {
                 v: getVideoId(url)
             }
@@ -31,7 +31,7 @@ form.addEventListener("submit", async (event)=>{
         console.error("[SUBMIT_ERROR] ",error)
     } finally{
         stopLoading()
-        await axios.delete("https://api.victor-palha.com/audio", {
+        await axios.delete("https://yt-api-ai.azurewebsites.net/audio", {
             params: {
                 v: getVideoId(url)
             }
