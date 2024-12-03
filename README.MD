@@ -1,6 +1,8 @@
 # Youtube Transcription
 This is a fullstack app create using Javascript, Node.js and Express. The app uses the Youtube API with ffmpeg to transcribe Youtube videos.
 
+![Preview](./docs/YT-AI.png)
+
 ## Client
 The client is made using vanilla Javascript and is responsible for sending the Youtube video URL to the server.
 After the server downloads the video, the client will display the transcription using the **Xenova Transformers** as a AI model.
