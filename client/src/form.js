@@ -5,6 +5,8 @@ import { transcribeAudio } from "./transcribe"
 import { renderText } from "./render"
 
 const form = window.document.querySelector("#form")
+const apiHost = import.meta.env.VITE_SERVER_HOST || "localhost"
+
 
 form.addEventListener("submit", async (event)=>{
     event.preventDefault()
@@ -17,7 +19,7 @@ form.addEventListener("submit", async (event)=>{
         await loadVideo(url)
 
         loadingMessage("Carregando o áudio do vídeo!")
-        const response = await axios.get("https://yt-api-ai.azurewebsites.net/audio", {
+        const response = await axios.get(`http://${apiHost}:3000/audio`, {
             params: {
                 v: getVideoId(url)
             }
@@ -25,13 +27,13 @@ form.addEventListener("submit", async (event)=>{
 
         console.log(response.data)
         const data = await transcribeAudio(response.data.path)        
-
+        console.log(data)
         renderText(data)
     } catch (error) {
         console.error("[SUBMIT_ERROR] ",error)
     } finally{
         stopLoading()
-        await axios.delete("https://yt-api-ai.azurewebsites.net/audio", {
+        await axios.delete(`http://${apiHost}:3000/audio`, {
             params: {
                 v: getVideoId(url)
             }

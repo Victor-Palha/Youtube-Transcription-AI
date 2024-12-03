@@ -1,0 +1,21 @@
+services:
+  server:
+    container_name: ytai-server
+    build: ./server
+    ports:
+      - 3000:3000
+    restart: always
+    networks:
+      - ytai
+
+  client:
+    container_name: ytai-client
+    build: ./client
+    ports:
+      - 3001:3001
+    networks:
+      - ytai
+
+networks:
+  ytai:
+    driver: bridge
